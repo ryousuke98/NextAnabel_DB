@@ -1,0 +1,505 @@
+-- MySQL dump 10.13  Distrib 5.7.27, for Linux (x86_64)
+--
+-- Host: localhost    Database: todoDB
+-- ------------------------------------------------------
+-- Server version	5.7.27-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `attribute_num`
+--
+
+DROP TABLE IF EXISTS `attribute_num`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `attribute_num` (
+  `id_attNum` int(4) NOT NULL,
+  `name` varchar(100) DEFAULT '',
+  `location` varchar(1024) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_attNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `attribute_num`
+--
+
+LOCK TABLES `attribute_num` WRITE;
+/*!40000 ALTER TABLE `attribute_num` DISABLE KEYS */;
+INSERT INTO `attribute_num` VALUES (1000,'勉強','\'内容\',\'\',\'\',\'\',\'ページ数\',\'ページ数\',\'最大ページ数\',\'\',\'開始時間\',\'\',\'画像パス\''),(2000,'買い物','\'買うものリスト\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'開始時間\',\'\',\'\''),(3000,'筋肉トレーニング','\'内容\',\'\',\'\',\'\',\'セット\',\'回数\',\'何分\',\'\',\'開始時間\',\'\',\'\''),(4000,'持ち物','\'持ち物リスト\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'開始時間\',\'\',\'\''),(5000,'やること','\'やることリスト\',\'\',\'\',\'\',\'\',\'\',\'\',\'\',\'開始時間\',\'\',\'\''),(6000,'運動','\'内容\',\'\',\'\',\'\',\'何時間\',\'何分\',\'\',\'\',\'開始時間\',\'\',\'\'');
+/*!40000 ALTER TABLE `attribute_num` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session'),(25,'Can add city',7,'add_city'),(26,'Can change city',7,'change_city'),(27,'Can delete city',7,'delete_city'),(28,'Can view city',7,'view_city'),(29,'Can add customer',8,'add_customer'),(30,'Can change customer',8,'change_customer'),(31,'Can delete customer',8,'delete_customer'),(32,'Can add hello',9,'add_hello'),(33,'Can change hello',9,'change_hello'),(34,'Can delete hello',9,'delete_hello'),(35,'Can add attribute num',10,'add_attributenum'),(36,'Can change attribute num',10,'change_attributenum'),(37,'Can delete attribute num',10,'delete_attributenum'),(38,'Can view attribute num',10,'view_attributenum'),(39,'Can add post',11,'add_post'),(40,'Can change post',11,'change_post'),(41,'Can delete post',11,'delete_post'),(42,'Can view post',11,'view_post'),(43,'Can add auth user',12,'add_authuser'),(44,'Can change auth user',12,'change_authuser'),(45,'Can delete auth user',12,'delete_authuser'),(46,'Can view auth user',12,'view_authuser'),(47,'Can add list',13,'add_list'),(48,'Can change list',13,'change_list'),(49,'Can delete list',13,'delete_list'),(50,'Can view list',13,'view_list'),(51,'Can add task',14,'add_task'),(52,'Can change task',14,'change_task'),(53,'Can delete task',14,'delete_task'),(54,'Can view task',14,'view_task'),(55,'Can add task detail',15,'add_taskdetail'),(56,'Can change task detail',15,'change_taskdetail'),(57,'Can delete task detail',15,'delete_taskdetail'),(58,'Can view task detail',15,'view_taskdetail');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (1,'pbkdf2_sha256$120000$K2xxMXnZdoGq$Oj+y5gRZFJ+VRjJBmuapxZSr4KkcgCN8CZCn5KV8g20=','2019-10-31 11:22:30.959688',1,'tendou','','','tendou@example.com',1,1,'2019-10-29 15:54:13.998109'),(2,'pbkdf2_sha256$150000$fpDpOXWSSXmg$BqiF+2AIJrEw05hW+k6Z1uMQjHXmTHfthYXcDStXunA=','2019-12-03 14:48:08.523524',1,'hikaru','','','math@god.com',1,1,'2019-11-04 01:47:13.288603'),(3,'pbkdf2_sha256$120000$gwxkHpk8ZW8H$HdCp4+slrQyrjBheKQp2WrMYjj+tOQSiadtxrRlEsII=','2019-11-07 00:21:28.711452',1,'sugisugi','','','sugisugi@example.com',1,1,'2019-11-06 23:38:30.149107'),(4,'pbkdf2_sha256$150000$Jft03r1FhXvY$PHAqmtGB0MuBPIw8+8olGUtCWFMtG43EuNbcfJ5dIRE=','2019-11-22 13:50:31.355086',1,'MyUser','','','',1,1,'2019-11-08 13:39:02.944861'),(5,'pbkdf2_sha256$150000$3poKhd2LyYRb$SYxZbW9b+h6LTi8DnCEJRbEOuSEVYQdIyLOZhwQ01Lk=','2019-11-12 17:10:13.517919',1,'yuyu22','','','b7385@oic.jp',1,1,'2019-11-08 14:50:41.447563'),(6,'pbkdf2_sha256$150000$Wzy1seEFz0x8$XBm4/l1rlCxukfDecoD+n1KZCUWbBptmTsXYJFd634I=','2019-11-15 14:17:49.534719',1,'TenTen','','','b7228@oic.jp',1,1,'2019-11-15 14:14:56.411832'),(7,'pbkdf2_sha256$150000$LjbTOheVUU3M$7CnWed882o0ONiRCKFJTe8KVaEaylzR9K5y6YVQy2mQ=','2019-12-03 14:48:51.193018',1,'kazuki','','','kazuki@example.com',1,1,'2019-12-03 14:48:22.166539');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(7,'city','city'),(5,'contenttypes','contenttype'),(8,'hello','customer'),(9,'hello','hello'),(6,'sessions','session'),(10,'testapp3','attributenum'),(12,'testapp3','authuser'),(13,'testapp3','list'),(11,'testapp3','post'),(14,'testapp3','task'),(15,'testapp3','taskdetail');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2019-10-29 05:25:03.845753'),(2,'auth','0001_initial','2019-10-29 05:25:07.722055'),(3,'admin','0001_initial','2019-10-29 05:25:08.331731'),(4,'admin','0002_logentry_remove_auto_add','2019-10-29 05:25:08.545682'),(5,'admin','0003_logentry_add_action_flag_choices','2019-10-29 05:25:08.801366'),(6,'contenttypes','0002_remove_content_type_name','2019-10-29 05:25:09.850551'),(7,'auth','0002_alter_permission_name_max_length','2019-10-29 05:25:10.096459'),(8,'auth','0003_alter_user_email_max_length','2019-10-29 05:25:10.294759'),(9,'auth','0004_alter_user_username_opts','2019-10-29 05:25:10.493727'),(10,'auth','0005_alter_user_last_login_null','2019-10-29 05:25:10.864167'),(11,'auth','0006_require_contenttypes_0002','2019-10-29 05:25:11.029915'),(12,'auth','0007_alter_validators_add_error_messages','2019-10-29 05:25:11.191262'),(13,'auth','0008_alter_user_username_max_length','2019-10-29 05:25:11.632453'),(14,'auth','0009_alter_user_last_name_max_length','2019-10-29 05:25:11.945516'),(15,'sessions','0001_initial','2019-10-29 05:25:12.310000'),(16,'city','0001_initial','2019-10-29 15:59:03.547507'),(17,'city','0002_auto_20191030_0109','2019-10-29 16:09:31.968286'),(18,'city','0003_auto_20191030_0111','2019-10-29 16:11:37.842700'),(19,'hello','0001_initial','2019-11-01 04:42:56.810089'),(20,'hello','0002_hello','2019-11-01 04:42:57.093217'),(21,'auth','0010_alter_group_name_max_length','2019-11-22 15:45:34.145924'),(22,'auth','0011_update_proxy_permissions','2019-11-22 15:45:38.446721'),(23,'testapp3','0001_initial','2019-11-22 15:46:07.117181'),(24,'testapp3','0002_authuser_list_task_taskdetail','2019-11-26 15:56:14.913656');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+INSERT INTO `django_session` VALUES ('2b12h6k5v4p6h2ssfk1feflmmgx9sf63','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-11-22 16:25:31.680160'),('4wu4wdffthvxmd3jev4ajwf6vcd3k5x8','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-03 14:31:11.638203'),('66mez3epcm84lky0r5j4swypw5act90y','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-11-22 16:25:14.694817'),('6sgbig3g70gxozwrsdwdeiygsrlpijpe','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-22 14:21:51.142124'),('7yal7xu0z11nw3wz4vln295fvd12zckd','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-03 14:31:06.481095'),('868s9ie7eqkvqtiua8tlfbqzungzz1sh','ODE1MGNkMDk0N2QyOGY2MjlkMTNlMGVjYjkxZGJiNWZlZjc0NDUzYTp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNTFmNzE0Mjg5YTczYTE3YTZmNGQ5MjkwOWU5Yjk2ZGI3OGFlZDMwIn0=','2019-11-20 23:38:58.794421'),('87nv805k56yc4j3kbamjfzo797dknrj8','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-11-22 13:41:28.580943'),('88vuzvph1aoof0ckqheohbk0aewgjdoe','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-12-17 14:48:10.062363'),('8c3gr8o3q4lhmo0xypj6r84316p56uy3','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-19 11:47:54.931039'),('8x8utip380v4vmqhcvw8mt2ar89l1rtc','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-03 14:31:10.696260'),('bwl5zh637toanyxc77lh5svvtwawf87q','M2Y5OGJjMTljNDMwOWRhYmNlMGVlZmFlNzVkNWM0YmJhMGNhMDM5YTp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4M2ZjMjE5YTVhZjhhYzU1ZTExZmIxNmM0YTMyZmRkZmIzZjNiMjhiIn0=','2019-11-26 14:07:56.629496'),('ddj25gwzbvmwp2a6wmfxzw9ssxcnx4bd','M2NjMDY0ZTJhYzFlYzJhOTUwOWI2MTVlZGU5OTc1OWM4OGEzZTM0MTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJjZTU1NzljMzI4NmM0MjUxNDA4ZjUwNDY0MDUxYmY3YTkwNTg0NzU5In0=','2019-11-12 15:54:42.995085'),('ejo9izaix09o8sbnr0d8u9prxggitkug','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-18 02:57:27.084304'),('fastuzbusl4oifewnd64ls93hcv2nz43','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-19 09:21:48.149182'),('h0yuqs3apf1jw6kcfcrf24v1ai5lk3am','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-22 16:14:00.438171'),('h80kj759ewlgx8bvhshl5kelm7ohmn8q','ZGZhNTA0NmI4MDEzYmNmM2M4YzY3YWIwMzMyM2FkMDk0MTgyMTM5Njp7Il9hdXRoX3VzZXJfaWQiOiI2IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlNjhhNTdjOWMyYWY1MTgyN2FiNWU5NjQ4OWNjYWYxM2MyMjY3NmFmIn0=','2019-11-29 14:17:51.789924'),('hdukfa4n1nq7fivospvrimqvlbo2z66a','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-27 22:50:16.619248'),('hqea4x8fqgzadrckp9h3udbbxjjginz1','M2Y5OGJjMTljNDMwOWRhYmNlMGVlZmFlNzVkNWM0YmJhMGNhMDM5YTp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4M2ZjMjE5YTVhZjhhYzU1ZTExZmIxNmM0YTMyZmRkZmIzZjNiMjhiIn0=','2019-11-22 14:53:01.224861'),('iekazvqrww0jdzan2o9yhyrq3uwyyne6','M2Y5OGJjMTljNDMwOWRhYmNlMGVlZmFlNzVkNWM0YmJhMGNhMDM5YTp7Il9hdXRoX3VzZXJfaWQiOiI1IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI4M2ZjMjE5YTVhZjhhYzU1ZTExZmIxNmM0YTMyZmRkZmIzZjNiMjhiIn0=','2019-11-26 17:10:18.435821'),('l0jw344sdwrsqrgutz7pr58d5es2wgdm','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-06 13:50:32.773873'),('ogbnu8ts8dl5wv2co4lb88hjthnulzxq','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-19 11:52:12.168308'),('p183dn1ltt6ye21t23kfk4wsjfi2ssyy','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-11-22 16:25:31.326598'),('pcwpz2karklj3doutxibyy7fae8nkdub','NGMwZDA1YmFmNDI4NWUyMDNjYjI1MDRiYzBlYzhkZmE5YTFlYzk1Njp7Il9hdXRoX3VzZXJfaWQiOiI3IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIzOTFkYWU4NDUxNWY3MWI2OGY1NjcyNTAxMTE0ZDg2MTRmNzA1MzE1In0=','2019-12-17 14:48:53.777194'),('pxzodfaf2mawm5h9w6tvc9yd6jop24xz','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-11-22 16:25:30.855496'),('r1z8ectr453qnkhxps9zj6jvwka8m923','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-03 14:31:01.042610'),('thew4bh9zikxkjwhds5bnwvq03ixg57t','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-03 14:31:10.362230'),('v8sd1e6rtatujjmrbo438031h65rlh98','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-12-17 14:34:41.078485'),('vqpwjh8om108a4bum5hs7ne6nfr0p204','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-03 14:31:12.698729'),('y7pbbijjcylg26p4g4b3s8pym90how4o','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-18 02:59:25.840878'),('yu70jepkazhxhtyoysget3822rlgerdt','ODE1MGNkMDk0N2QyOGY2MjlkMTNlMGVjYjkxZGJiNWZlZjc0NDUzYTp7Il9hdXRoX3VzZXJfaWQiOiIzIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJkNTFmNzE0Mjg5YTczYTE3YTZmNGQ5MjkwOWU5Yjk2ZGI3OGFlZDMwIn0=','2019-11-21 00:21:28.803539'),('zn6ojnnuxm4s2qcfw0otp7geym6jga1b','NGIyYTFiMDg1MDFiODA4NWZlNWI4MTY0ZTc1MjNkOTQ5YzQ1NDExMTp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJhOTQ1MjI1MTAyZDBlZmZmZDI0NTYwNGI0MDZkNTcyYmI3MTYxNTM0In0=','2019-11-27 22:51:23.283007'),('zt4gxv6tgua1z1l9qe5o6gejfw6cvvd2','ZThkMWRkODE1NjdiNTRjNzU4YWVlYjdlNWQ0YWEwMjEwYTU2OTMzOTp7Il9hdXRoX3VzZXJfaWQiOiI0IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI0MzMzOGRmNzFkOTM3NjcwNDU5MzU2MDYyMWE3NDEwYzk5YTc4ZDc2In0=','2019-12-03 14:31:12.336290');
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hello_customer`
+--
+
+DROP TABLE IF EXISTS `hello_customer`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hello_customer` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(20) NOT NULL,
+  `first_name` varchar(20) NOT NULL,
+  `email_address` varchar(255) NOT NULL,
+  `memo` longtext,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email_address` (`email_address`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hello_customer`
+--
+
+LOCK TABLES `hello_customer` WRITE;
+/*!40000 ALTER TABLE `hello_customer` DISABLE KEYS */;
+/*!40000 ALTER TABLE `hello_customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hello_hello`
+--
+
+DROP TABLE IF EXISTS `hello_hello`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hello_hello` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `your_name` varchar(10) NOT NULL,
+  `password` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hello_hello`
+--
+
+LOCK TABLES `hello_hello` WRITE;
+/*!40000 ALTER TABLE `hello_hello` DISABLE KEYS */;
+INSERT INTO `hello_hello` VALUES (1,'yamawaki','12345_kitatyousen'),(2,'ンゴロンゴロ保全地域',NULL),(3,'zutomayo','123456789');
+/*!40000 ALTER TABLE `hello_hello` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `list`
+--
+
+DROP TABLE IF EXISTS `list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `list` (
+  `id_list` varchar(11) NOT NULL DEFAULT '',
+  `id_task` varchar(11) NOT NULL DEFAULT '',
+  `time` datetime NOT NULL,
+  `complete` tinyint(1) DEFAULT NULL,
+  `username` varchar(100) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id_list`),
+  KEY `id_task` (`id_task`),
+  KEY `user` (`username`),
+  CONSTRAINT `list_ibfk_1` FOREIGN KEY (`id_task`) REFERENCES `task` (`id_task`),
+  CONSTRAINT `user` FOREIGN KEY (`username`) REFERENCES `auth_user` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `list`
+--
+
+LOCK TABLES `list` WRITE;
+/*!40000 ALTER TABLE `list` DISABLE KEYS */;
+INSERT INTO `list` VALUES ('1D1z9EBKLhh','TpPlfi8l8A3','2019-11-15 00:00:00',NULL,'hikaru'),('BmbXsmmifak','sN068DtWXkG','2019-11-14 00:00:00',NULL,'hikaru'),('GqnYCKMkw4Z','19Nv51lMAVZ','2019-11-12 00:00:00',NULL,'hikaru'),('jpbvBWy7PaK','OPTXll1Png3','2019-11-11 00:00:00',NULL,'hikaru'),('lbQI6Yhmh0y','EicyXw3d7dz','2019-11-10 00:00:00',NULL,'hikaru'),('qAIKD0cn4eW','nLG4cGELHaa','2019-11-13 00:00:00',NULL,'hikaru');
+/*!40000 ALTER TABLE `list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `task`
+--
+
+DROP TABLE IF EXISTS `task`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `task` (
+  `id_task` varchar(11) NOT NULL DEFAULT '',
+  `id_taskDet` varchar(12) NOT NULL DEFAULT '',
+  `repeat` tinyint(1) DEFAULT NULL COMMENT '実行したか実行してないか',
+  PRIMARY KEY (`id_task`),
+  KEY `id_taskDet` (`id_taskDet`),
+  CONSTRAINT `task_ibfk_1` FOREIGN KEY (`id_taskDet`) REFERENCES `task_detail` (`id_taskDet`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `task`
+--
+
+LOCK TABLES `task` WRITE;
+/*!40000 ALTER TABLE `task` DISABLE KEYS */;
+INSERT INTO `task` VALUES ('19Nv51lMAVZ','3zn8lpQAmcMg',NULL),('EicyXw3d7dz','bVi847051847',NULL),('nLG4cGELHaa','12Hp6KX9QiPl',NULL),('OPTXll1Png3','Msl378084874',1),('sN068DtWXkG','ToY406384833',NULL),('TpPlfi8l8A3','5G9m0It69nx3',NULL);
+/*!40000 ALTER TABLE `task` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `task_detail`
+--
+
+DROP TABLE IF EXISTS `task_detail`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `task_detail` (
+  `id_taskDet` varchar(12) NOT NULL DEFAULT '' COMMENT '３桁英（大小）、９桁数字',
+  `id_attNum` int(6) DEFAULT NULL,
+  `text_0` varchar(100) DEFAULT NULL,
+  `text_1` varchar(100) DEFAULT NULL,
+  `text_2` varchar(100) DEFAULT NULL,
+  `text_3` varchar(100) DEFAULT NULL,
+  `num_0` int(100) DEFAULT NULL,
+  `num_1` int(100) DEFAULT NULL,
+  `num_2` int(100) DEFAULT NULL,
+  `num_3` int(100) DEFAULT NULL,
+  `timeStart` time DEFAULT NULL,
+  `timeEnd` time DEFAULT NULL,
+  `picturePass` varchar(100) DEFAULT NULL,
+  `URL` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_taskDet`),
+  KEY `id_attNum` (`id_attNum`),
+  CONSTRAINT `task_detail_ibfk_1` FOREIGN KEY (`id_attNum`) REFERENCES `attribute_num` (`id_attNum`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `task_detail`
+--
+
+LOCK TABLES `task_detail` WRITE;
+/*!40000 ALTER TABLE `task_detail` DISABLE KEYS */;
+INSERT INTO `task_detail` VALUES ('12Hp6KX9QiPl',4000,'メモ帳、ペン、お茶、ハンカチ、飴ちゃん',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'06:00:00',NULL,NULL,NULL),('3zn8lpQAmcMg',5000,'部屋の掃除、課題、レポート作成',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'08:30:00',NULL,NULL,NULL),('5G9m0It69nx3',6000,'ランニング',NULL,NULL,NULL,1,30,NULL,NULL,'11:30:00',NULL,NULL,NULL),('bVi847051847',2000,'たまご,牛乳,パン,玉ねぎ,洗剤',NULL,NULL,NULL,NULL,NULL,NULL,NULL,'10:00:00',NULL,NULL,NULL),('Msl378084874',1000,'英語　英文法授業ノート',NULL,NULL,NULL,3,10,100,NULL,'21:00:00',NULL,'',''),('ToY406384833',3000,'腹筋',NULL,NULL,NULL,5,10,NULL,NULL,'08:35:00',NULL,NULL,NULL);
+/*!40000 ALTER TABLE `task_detail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `testapp3_post`
+--
+
+DROP TABLE IF EXISTS `testapp3_post`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `testapp3_post` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `memo` longtext NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `testapp3_post`
+--
+
+LOCK TABLES `testapp3_post` WRITE;
+/*!40000 ALTER TABLE `testapp3_post` DISABLE KEYS */;
+/*!40000 ALTER TABLE `testapp3_post` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2019-12-05 16:18:10
